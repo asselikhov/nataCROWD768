@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Telegraf } = require('telegraf');
 const mongoose = require('mongoose');
-const session = require('telegraf/session');
+const { session } = require('telegraf');
 const express = require('express');
 const { adminHandler } = require('./handlers/admin');
 const { contentHandler } = require('./handlers/content');
@@ -10,11 +10,12 @@ const { showcaseHandler } = require('./handlers/showcase');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const app = express();
 
-// Подключение к MongoDB
+// Подключение к MongoDB Atlas
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).then(() => console.log('Connected to MongoDB Atlas'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware для логирования посещений
 bot.use(session());
@@ -43,7 +44,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// Обработка корневого пути (для проверки)
 app.get('/', (req, res) => {
   res.send('Telegram Bot is running!');
 });
