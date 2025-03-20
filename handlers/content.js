@@ -22,9 +22,8 @@ function contentHandler(bot) {
 `;
 
         try {
-            // Замените URL анимации на корректный file_id или ссылку
             await ctx.replyWithAnimation(
-                'https://t.me/gamee/112', // Проверьте, работает ли этот URL, или используйте file_id
+                'https://t.me/gamee/112', // Замените на file_id, если не работает
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
 

@@ -20,11 +20,9 @@ requiredEnv.forEach(key => {
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const app = express();
 
-// Подключение к MongoDB Atlas
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('Connected to MongoDB Atlas'))
+// Подключение к MongoDB Atlas (без устаревших опций)
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('Connected to MongoDB Atlas'))
     .catch(err => {
       console.error('MongoDB connection error:', err);
       process.exit(1);
@@ -47,13 +45,13 @@ bot.use(async (ctx, next) => {
   await next();
 });
 
-// Регистрация обработчиков
-bot.use(contentHandler);
-bot.use(showcaseHandler);
-bot.use(adminHandler);
+// Регистрация обработчиков (передаем bot напрямую)
+contentHandler(bot);
+showcaseHandler(bot);
+adminHandler(bot);
 
 // Настройка Webhook
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000; // Render использует PORT из окружения
 app.use(bot.webhookCallback(`/bot${process.env.BOT_TOKEN}`));
 bot.telegram.setWebhook(`https://${process.env.RENDER_APP_NAME}.onrender.com/bot${process.env.BOT_TOKEN}`)
     .then(() => console.log('Webhook set successfully'))
