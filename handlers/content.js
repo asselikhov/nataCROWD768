@@ -24,7 +24,7 @@ function contentHandler(bot) {
         try {
             // Временно убираем анимацию, пока не будет file_id или прямой URL
             await ctx.replyWithAnimation(
-                'https://drive.google.com/file/d/1szYD2HEumGyOQvwI5JZ2hk-riTKpX8uV/view?usp=drive_link', // Прямая ссылка
+                'AQAD4GoAAhkw4Upy', // Замените на ваш file_id
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
 
