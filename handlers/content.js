@@ -31,9 +31,9 @@ function contentHandler(bot) {
             const about = await getContent('about');
             console.log('Fetched about content:', about.text);
 
-            // Отправляем .mp4 как видео (замените на ваш file_id)
+            // Отправляем .mp4 как видео (замените на ваш file_id для видео)
             await ctx.replyWithVideo(
-                'AgADkmsAAhkw4Uo', // Укажите ваш валидный file_id для видео .mp4 здесь
+                'AgADkmsAAhkw4Uo', // Укажите ваш валидный file_id для .mp4 видео здесь
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
             console.log('Sent video');
