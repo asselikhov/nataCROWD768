@@ -2,13 +2,18 @@ const Content = require('../models/Content');
 const { Markup } = require('telegraf');
 
 async function getContent(section) {
-    return await Content.findOne({ section }) || { text: 'Контент не задан' };
+    try {
+        const content = await Content.findOne({ section });
+        return content || { text: 'Контент не задан' };
+    } catch (err) {
+        console.error('Error fetching content from MongoDB:', err);
+        return { text: 'Контент не задан' };
+    }
 }
 
 function contentHandler(bot) {
     bot.start(async (ctx) => {
         const username = ctx.from.first_name || ctx.from.username || 'Гость';
-        const about = await getContent('about');
 
         const businessCard = `
 🌟 *Ваша Визитка* 🌟  
@@ -22,11 +27,12 @@ function contentHandler(bot) {
 `;
 
         try {
-            // Временно убираем анимацию, пока не будет file_id или прямой URL
-            await ctx.replyWithAnimation(
-                'AQAD4GoAAhkw4Upy', // Замените на ваш file_id
-                { caption: `✨ Привет, ${username}! Вот моя визитка:` }
-            );
+            console.log('Starting /start handler for user:', username);
+            const about = await getContent('about');
+            console.log('Fetched about content:', about.text);
+
+            await ctx.reply(`✨ Привет, ${username}! Вот моя визитка:`);
+            console.log('Sent welcome message');
 
             await ctx.replyWithMarkdownV2(
                 businessCard.replace(/([_*[\]()~`>#+-=|{}.!])/g, '\\$1'),
@@ -36,6 +42,7 @@ function contentHandler(bot) {
                     [Markup.button.callback('📞 Связаться', 'contact')],
                 ])
             );
+            console.log('Sent business card with buttons');
         } catch (err) {
             console.error('Error sending start message:', err);
             ctx.reply('Произошла ошибка при отправке визитки');
