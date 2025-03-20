@@ -31,8 +31,11 @@ function contentHandler(bot) {
             const about = await getContent('about');
             console.log('Fetched about content:', about.text);
 
-            await ctx.reply(`✨ Привет, ${username}! Вот моя визитка:`);
-            console.log('Sent welcome message');
+            await ctx.replyWithAnimation(
+                'AgADBAA...', // Замените на ваш валидный file_id
+                { caption: `✨ Привет, ${username}! Вот моя визитка:` }
+            );
+            console.log('Sent animation');
 
             await ctx.replyWithMarkdownV2(
                 businessCard.replace(/([_*[\]()~`>#+-=|{}.!])/g, '\\$1'),
