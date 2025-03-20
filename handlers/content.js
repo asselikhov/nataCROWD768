@@ -31,11 +31,12 @@ function contentHandler(bot) {
             const about = await getContent('about');
             console.log('Fetched about content:', about.text);
 
-            await ctx.replyWithAnimation(
-                'AgAD4GoAAhkw4Uo', // Замените на ваш валидный file_id анимации
+            // Отправляем .mp4 как видео (замените на ваш file_id)
+            await ctx.replyWithVideo(
+                'AgADkmsAAhkw4Uo', // Укажите ваш валидный file_id для видео .mp4 здесь
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
-            console.log('Sent animation');
+            console.log('Sent video');
 
             await ctx.replyWithMarkdownV2(
                 businessCard.replace(/([_*[\]()~`>#+-=|{}.!])/g, '\\$1'),
