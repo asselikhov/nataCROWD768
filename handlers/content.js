@@ -32,7 +32,7 @@ function contentHandler(bot) {
             console.log('Fetched about content:', about.text);
 
             await ctx.replyWithAnimation(
-                'AgAD4GoAAhkw4Uo', // Замените на ваш валидный file_id
+                'AAMCAgADGQEB4i6FZ9u8UjKZ7h3C5ceJ84kThdakykQAAuBqAAIZMOFKEJCWZKCNISIBAAdtAAM2BA', // Замените на ваш валидный file_id
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
             console.log('Sent animation');
