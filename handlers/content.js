@@ -22,8 +22,9 @@ function contentHandler(bot) {
 `;
 
         try {
+            // Временно убираем анимацию, пока не будет file_id или прямой URL
             await ctx.replyWithAnimation(
-                'https://t.me/gamee/112', // Замените на file_id, если не работает
+                'https://drive.google.com/file/d/1szYD2HEumGyOQvwI5JZ2hk-riTKpX8uV/view?usp=drive_link', // Прямая ссылка
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
 
