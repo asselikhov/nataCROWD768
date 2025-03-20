@@ -33,7 +33,7 @@ function contentHandler(bot) {
 
             // Отправляем .mp4 как видео (замените на ваш file_id для видео)
             await ctx.replyWithVideo(
-                'AgADkmsAAhkw4Uo', // Укажите ваш валидный file_id для .mp4 видео здесь
+                'AAMCAgADGQEB4jNKZ9vGWXO7EgX0ByPCkmgW6JMa8PEAApJrAAIZMOFKwAaac5AsFLEBAAdtAAM2BA', // Укажите ваш валидный file_id для .mp4 видео здесь
                 { caption: `✨ Привет, ${username}! Вот моя визитка:` }
             );
             console.log('Sent video');
